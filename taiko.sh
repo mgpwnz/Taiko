@@ -36,11 +36,11 @@ if [ ! $WS ]; then
 		read -p "Enter WS for example 10.1.1.1:8546 : " WS
 		echo 'export WS='${WS} >> $HOME/.bash_profile
 	fi
-if [ ! $HTTPS ]; then
+if [ ! $MMA ]; then
 		read -p "Enter Metamask address : " MMA
 		echo 'export MMA='${MMA} >> $HOME/.bash_profile
         fi
-if [ ! $HTTPS ]; then
+if [ ! $MMP ]; then
 		read -p "Enter Metamask Private Key : " MMP
 		echo 'export MMP='${MMP} >> $HOME/.bash_profile
         fi
