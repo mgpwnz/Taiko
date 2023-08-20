@@ -39,9 +39,11 @@ if [ ! $WS ]; then
 if [ ! $HTTPS ]; then
 		read -p "Enter Metamask address : " MMA
 		echo 'export MMA='${MMA} >> $HOME/.bash_profile
+        fi
 if [ ! $HTTPS ]; then
 		read -p "Enter Metamask Private Key : " MMP
 		echo 'export MMP='${MMP} >> $HOME/.bash_profile
+        fi
    . $HOME/.bash_profile
    sleep 2
 }
