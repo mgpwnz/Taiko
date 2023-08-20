@@ -66,7 +66,7 @@ esac
 
 break
 ;;
-"Create the configuration manually"
+"Create the configuration manually")
 echo "TAIKO 2"
 sleep 3
 nano $HOME/simple-taiko-node/.env
