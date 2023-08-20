@@ -27,7 +27,7 @@ break
 ;;
 
 "Create config")
-vars() {
+
 if [ ! $HTTPS ]; then
 		read -p "Enter HTTPS for example 10.1.1.1:8545 : " HTTPS
 		echo 'export HTTPS='${HTTPS} >> $HOME/.bash_profile
@@ -46,9 +46,8 @@ if [ ! $HTTPS ]; then
         fi
    . $HOME/.bash_profile
    sleep 2
-}
-#create config
-config() {
+
+
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=${HTTPS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://${WS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
@@ -60,7 +59,7 @@ sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $
 sed -i -e "s%ENABLE_PROPOSER=true%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env.l3
-}
+
 break
 ;;
 
