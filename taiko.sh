@@ -65,7 +65,7 @@ break
 
 "Run Taiko 2")
 cd $HOME/simple-taiko-node/
-docker compose up -d --remove-orphans
+docker compose up -d 
 docker compose logs -f
 
 break
@@ -73,7 +73,7 @@ break
 
 "Run Taiko 3")
 cd $HOME/simple-taiko-node/
-docker compose -f ./docker-compose.l3.yml --env-file .env.l3 up -d --remove-orphans
+docker compose -f ./docker-compose.l3.yml --env-file .env.l3 up -d 
 docker compose -f ./docker-compose.l3.yml --env-file .env.l3 logs -f
 
 break
