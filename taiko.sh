@@ -26,6 +26,10 @@ sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
 break
 ;;
 "Sepolia RPC")
+bash_profile=$HOME/.bash_profile
+if [ -f "$bash_profile" ]; then
+    . $HOME/.bash_profile
+fi
 if [ ! $HTTPS ]; then
 		read -p "Enter HTTPS for example 10.1.1.1:8545 : " HTTPS
 		echo 'export HTTPS='${HTTPS} >> $HOME/.bash_profile
@@ -48,10 +52,8 @@ if [ ! $MMP ]; then
 		read -p "Enter Metamask Private Key : " MMP
 		echo 'export MMP='${MMP} >> $HOME/.bash_profile
         fi
-bash_profile=$HOME/.bash_profile
-if [ -f "$bash_profile" ]; then
-    . $HOME/.bash_profile
-fi
+ . $HOME/.bash_profile
+sleep 1
 sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
