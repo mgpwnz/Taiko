@@ -1,7 +1,9 @@
 #!/bin/bash
 while true
 do
-
+if [ -f "$bash_profile" ]; then
+    . $HOME/.bash_profile
+fi
 # Menu
 
 PS3='Select an action: '
