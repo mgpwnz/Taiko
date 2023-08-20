@@ -8,7 +8,7 @@ PS3='Select an action: '
 options=("Docker" "Download the components" "Create config" "Run Taiko 2" "Run Taiko 3" "Update Taiko 2" "Update Taiko 3" "Uninstall Taiko 3" "Uninstall Taiko 2" "Exit")
 select opt in "${options[@]}"
                do
-                   case $opt in                           
+                   case $opt in                          
 
 "Docker")
 #docker
@@ -55,6 +55,7 @@ sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $
 sed -i -e "s%ENABLE_PROPOSER=true%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env.l3
+
 break
 ;;
 
@@ -62,6 +63,7 @@ break
 cd $HOME/simple-taiko-node/
 docker compose up -d --remove-orphans
 docker compose logs -f
+
 break
 ;;
 
@@ -69,6 +71,7 @@ break
 cd $HOME/simple-taiko-node/
 docker compose -f ./docker-compose.l3.yml --env-file .env.l3 up -d --remove-orphans
 docker compose -f ./docker-compose.l3.yml --env-file .env.l3 logs -f
+
 break
 ;;
 
@@ -90,6 +93,7 @@ cd $HOME/simple-taiko-node && docker compose down
 #docker start
 docker compose up -d
 docker compose logs -f
+
 break
 ;;
 "Update Taiko 3")
@@ -109,12 +113,14 @@ cd $HOME/simple-taiko-node && docker compose -f ./docker-compose.l3.yml --env-fi
 #docker start
 docker compose -f ./docker-compose.l3.yml --env-file .env.l3 up -d
 docker compose -f ./docker-compose.l3.yml --env-file .env.l3 logs -f
+
 break
 ;;
 
 "Uninstall Taiko 3")
 cd $HOME/simple-taiko-node && docker compose -f ./docker-compose.l3.yml --env-file .env.l3 down -v
 rm  .env.l3
+
 break
 ;;
 
@@ -124,6 +130,7 @@ rm  .env
 cd
 rm -rf simple-taiko-node
 unset HTTPS WS MMP MMA
+
 break
 ;;
 
