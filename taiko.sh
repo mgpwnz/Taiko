@@ -1,9 +1,7 @@
 #!/bin/bash
 while true
 do
-if [ -f "$bash_profile" ]; then
-    . $HOME/.bash_profile
-fi
+
 # Menu
 
 PS3='Select an action: '
@@ -50,7 +48,9 @@ if [ ! $MMP ]; then
 		read -p "Enter Metamask Private Key : " MMP
 		echo 'export MMP='${MMP} >> $HOME/.bash_profile
         fi
-. $HOME/.bash_profile
+if [ -f "$bash_profile" ]; then
+    . $HOME/.bash_profile
+fi
 sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
