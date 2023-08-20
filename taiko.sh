@@ -44,8 +44,8 @@ if [ ! $MMP ]; then
 		read -p "Enter Metamask Private Key : " MMP
 		echo 'export MMP='${MMP} >> $HOME/.bash_profile
         fi
-   . $HOME/.bash_profile
-   sleep 2
+. $HOME/.bash_profile
+sleep 2
 
 
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=${HTTPS}%g" $HOME/simple-taiko-node/.env
