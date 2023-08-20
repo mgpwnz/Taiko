@@ -133,7 +133,6 @@ cd $HOME/simple-taiko-node && docker compose down -v
 rm  .env
 cd
 rm -rf simple-taiko-node
-unset HTTPS WS MMP MMA
 
 break
 ;;
