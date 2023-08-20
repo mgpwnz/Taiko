@@ -105,14 +105,13 @@ cp .env.sample .env && cp .env.sample.l3 .env.l3
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://${HTTPS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://${WS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
+
 read -r -p "Run proposer? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
-        if [ ! $MMA ]; then
 sed -i -e "s%ENABLE_PROPOSER=true%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
-
         ;;
     *)
         echo Running
@@ -139,7 +138,6 @@ sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $
 read -r -p "Run proposer? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
-        if [ ! $MMA ]; then
 sed -i -e "s%ENABLE_PROPOSER=true%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L2_PROPOSER_PRIVATE_KEY=.*%L2_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L3_SUGGESTED_FEE_RECIPIENT=.*%L3_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env.l3
