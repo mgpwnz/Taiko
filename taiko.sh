@@ -5,11 +5,7 @@ do
 # Menu
 
 PS3='Select an action: '
-<<<<<<< HEAD
 options=("Docker" "Download the components" "Create config" "Run Taiko 2" "Run Taiko 3" "Update Taiko 2" "Update Taiko 3" "Uninstall Taiko 3" "Uninstall Taiko 2" "Exit")
-=======
-options=("Docker" "Download the components" "Run docker" "Check log" "Exit")
->>>>>>> 6e3f800114501a77f31163406d93376e3ee12b12
 select opt in "${options[@]}"
                do
                    case $opt in                           
@@ -66,7 +62,6 @@ break
 cd $HOME/simple-taiko-node/
 docker compose up -d --remove-orphans
 docker compose logs -f
-
 break
 ;;
 
@@ -74,7 +69,6 @@ break
 cd $HOME/simple-taiko-node/
 docker compose -f ./docker-compose.l3.yml --env-file .env.l3 up -d --remove-orphans
 docker compose -f ./docker-compose.l3.yml --env-file .env.l3 logs -f
-
 break
 ;;
 
@@ -96,7 +90,6 @@ cd $HOME/simple-taiko-node && docker compose down
 #docker start
 docker compose up -d
 docker compose logs -f
-
 break
 ;;
 "Update Taiko 3")
@@ -118,11 +111,13 @@ docker compose -f ./docker-compose.l3.yml --env-file .env.l3 up -d
 docker compose -f ./docker-compose.l3.yml --env-file .env.l3 logs -f
 break
 ;;
+
 "Uninstall Taiko 3")
 cd $HOME/simple-taiko-node && docker compose -f ./docker-compose.l3.yml --env-file .env.l3 down -v
 rm  .env.l3
 break
 ;;
+
 "Uninstall Taiko 2")
 cd $HOME/simple-taiko-node && docker compose down -v
 rm  .env
@@ -131,6 +126,7 @@ rm -rf simple-taiko-node
 unset HTTPS WS MMP MMA
 break
 ;;
+
 "Exit")
 exit
 ;;
