@@ -38,7 +38,7 @@ if [ ! $WS ]; then
 		read -p "Enter WS for example 10.1.1.1:8546 : " WS
 		echo 'export WS='${WS} >> $HOME/.bash_profile
 	fi
-sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=${HTTPS}%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://${HTTPS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://${WS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_ENDPOINT_HTTP=.*%L2_ENDPOINT_HTTP=http://127.0.0.1:8547%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L2_ENDPOINT_WS=.*%L2_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $HOME/simple-taiko-node/.env.l3
