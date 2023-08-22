@@ -100,7 +100,7 @@ cd $HOME/simple-taiko-node/
 git pull
 sleep 5
 rm .env 
-cp .env.sample .env && cp .env.sample.l3 .env.l3
+cp .env.sample .env 
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://${HTTPS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://${WS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
@@ -132,8 +132,8 @@ git pull
 sleep 5
 rm  .env.l3
 cp .env.sample.l3 .env.l3
-sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://127.0.0.1:8547%g" $HOME/simple-taiko-node/.env.l3
-sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $HOME/simple-taiko-node/.env.l3
+sed -i -e "s%L2_ENDPOINT_HTTP=.*%L2_ENDPOINT_HTTP=http://127.0.0.1:8547%g" $HOME/simple-taiko-node/.env.l3
+sed -i -e "s%L2_ENDPOINT_WS=.*%L2_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $HOME/simple-taiko-node/.env.l3
 read -r -p "Run proposer? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
