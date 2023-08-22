@@ -5,7 +5,7 @@ do
 # Menu
 
 PS3='Select an action: '
-options=("Docker" "Download the components" "Create the configuration manually" "Sepolia RPC" "Run Taiko 2" "Run Taiko 3" "Update Taiko 2 Sepolia" "Update Taiko 3 Sepolia" "Uninstall" "Exit")
+options=("Docker" "Download the components" "Create the configuration manually Alchemy or Infura" "Create the configuration using Sepolia RPC" "Run Taiko 2" "Run Taiko 3" "Update Taiko 2 Sepolia" "Update Taiko 3 Sepolia" "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
                    case $opt in                          
@@ -25,7 +25,7 @@ cp .env.sample .env && cp .env.sample.l3 .env.l3
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
 break
 ;;
-"Sepolia RPC")
+"Create the configuration using Sepolia RPC")
 bash_profile=$HOME/.bash_profile
 if [ -f "$bash_profile" ]; then
     . $HOME/.bash_profile
@@ -70,7 +70,13 @@ esac
 
 break
 ;;
-"Create the configuration manually")
+"Create the configuration manually Alchemy or Infura")
+cd $HOME/simple-taiko-node/
+git pull
+rm .env .env.l3
+cp .env.sample .env && cp .env.sample.l3 .env.l3
+sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
+sleep 2
 echo "TAIKO 2"
 sleep 3
 nano $HOME/simple-taiko-node/.env
