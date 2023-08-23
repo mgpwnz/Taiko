@@ -179,6 +179,9 @@ break
 ;;
 
 "Uninstall")
+if [ ! -d "$HOME/simple-taiko-node" ]; then
+    break
+fi
 read -r -p "Wipe all DATA? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
