@@ -71,10 +71,11 @@ esac
 break
 ;;
 "Create the configuration manually Alchemy or Infura")
-cd $HOME/simple-taiko-node/
+
 read -r -p "Do you want wipe configuration? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
+cd $HOME/simple-taiko-node/
 git pull
 rm .env .env.l3
 cp .env.sample .env && cp .env.sample.l3 .env.l3
