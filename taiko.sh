@@ -173,6 +173,9 @@ break
 ;;
 
 "Uninstall")
+read -r -p "Wipe all DATA? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
 cd $HOME/simple-taiko-node && docker compose -f ./docker-compose.l3.yml --env-file .env.l3 down -v
 rm  .env.l3
 sleep 2
@@ -180,7 +183,15 @@ cd $HOME/simple-taiko-node && docker compose down -v
 rm  .env
 cd
 rm -rf simple-taiko-node
-
+        ;;
+    *)
+    cd $HOME/simple-taiko-node && docker compose -f ./docker-compose.l3.yml --env-file .env.l3 down
+    sleep
+    cd $HOME/simple-taiko-node && docker compose down 
+    echo Taiko containers remove!
+        break
+        ;;
+esac
 break
 ;;
 
