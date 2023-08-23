@@ -80,6 +80,13 @@ git pull
 rm .env .env.l3
 cp .env.sample .env && cp .env.sample.l3 .env.l3
 sed -i -e "s%PORT_GRAFANA=3001.*%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
+sleep 2
+echo "TAIKO 2"
+sleep 3
+nano $HOME/simple-taiko-node/.env
+echo "TAIKO 3"
+sleep 3
+nano $HOME/simple-taiko-node/.env.l3
         ;;
     *)
 echo "TAIKO 2"
