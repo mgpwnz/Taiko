@@ -72,10 +72,19 @@ break
 ;;
 "Create the configuration manually Alchemy or Infura")
 cd $HOME/simple-taiko-node/
+read -r -p "Do you want wipe configuration? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
 git pull
 rm .env .env.l3
 cp .env.sample .env && cp .env.sample.l3 .env.l3
-sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%PORT_GRAFANA=3001.*%PORT_GRAFANA=3003%g" $HOME/simple-taiko-node/.env
+        ;;
+    *)
+        echo New configuration cteated!
+        break
+        ;;
+esac
 sleep 2
 echo "TAIKO 2"
 sleep 3
