@@ -159,7 +159,7 @@ sed -i -e "s%L2_ENDPOINT_WS=.*%L2_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $
 read -r -p "Run proposer? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
-sed -i -e "s%ENABLE_PROPOSER=true%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env.l3
+sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L2_PROPOSER_PRIVATE_KEY=.*%L2_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env.l3
 sed -i -e "s%L3_SUGGESTED_FEE_RECIPIENT=.*%L3_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env.l3
         ;;
