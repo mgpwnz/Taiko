@@ -184,7 +184,7 @@ case "$response" in
 docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f | grep proposer
         ;;
     *)
-docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f 
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 1000
         break
         ;;
 esac
@@ -198,7 +198,7 @@ case "$response" in
 docker compose -f $HOME/simple-taiko-node/docker-compose.l3.yml  logs -f | grep proposer
         ;;
     *)
-docker compose -f $HOME/simple-taiko-node/docker-compose.l3.yml  logs -f
+docker compose -f $HOME/simple-taiko-node/docker-compose.l3.yml  logs -f --tail 1000
         break
         ;;
 esac
