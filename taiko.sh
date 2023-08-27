@@ -5,7 +5,7 @@ do
 # Menu
 
 PS3='Select an action: '
-options=("Docker" "Download the components" "Create the configuration manually Alchemy or Infura" "Create the configuration using Sepolia RPC" "Run Taiko 2" "Run Taiko 3" "Update Taiko 2 Sepolia" "Update Taiko 3 Sepolia" "Uninstall" "Exit")
+options=("Docker" "Download the components" "Create the configuration manually Alchemy or Infura" "Create the configuration using Sepolia RPC" "Run Taiko 2" "Run Taiko 3" "T2 logs" "T3 logs" "Update Taiko 2 Sepolia" "Update Taiko 3 Sepolia" "T2 log proposer" "T3 log proposer" "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
                    case $opt in                          
@@ -177,7 +177,23 @@ docker compose -f ./docker-compose.l3.yml --env-file .env.l3 logs -f
 
 break
 ;;
+"T2 logs")
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f 
+break
+;;
 
+"T3 logs")
+docker compose -f $HOME/simple-taiko-node/docker-compose.l3.yml  logs -f
+break
+;;
+"T2 log proposer")
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f | grep proposer
+break
+;;
+"T3 log proposer")
+docker compose -f $HOME/simple-taiko-node/docker-compose.l3.yml  logs -f | grep proposer
+break
+;;
 "Uninstall")
 if [ ! -d "$HOME/simple-taiko-node" ]; then
     break
