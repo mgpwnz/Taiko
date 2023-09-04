@@ -86,6 +86,8 @@ sleep 3
 nano $HOME/simple-taiko-node/.env
 echo "TAIKO 3"
 sleep 3
+sed -i -e "s%L2_ENDPOINT_HTTP=%L2_ENDPOINT_HTTP=http://127.0.0.1:8547%g" $HOME/simple-taiko-node/.env.l3
+sed -i -e "s%L2_ENDPOINT_WS=%L2_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $HOME/simple-taiko-node/.env.l3
 nano $HOME/simple-taiko-node/.env.l3
         ;;
     *)
@@ -94,7 +96,8 @@ sleep 3
 nano $HOME/simple-taiko-node/.env
 echo "TAIKO 3"
 sleep 3
-nano $HOME/simple-taiko-node/.env.l3
+sed -i -e "s%L2_ENDPOINT_HTTP=%L2_ENDPOINT_HTTP=http://127.0.0.1:8547%g" $HOME/simple-taiko-node/.env.l3
+sed -i -e "s%L2_ENDPOINT_WS=%L2_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8548%g" $HOME/simple-taiko-node/.env.l3
         break
         ;;
 esac
