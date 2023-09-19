@@ -5,7 +5,7 @@ do
 # Menu
 
 PS3='Select an action: '
-options=("Docker" "Download the components" "Create the configuration" "Run Taiko" "Update Taiko" "logs" "Uninstall" "Exit")
+options=("Docker" "Download the components" "Create the configuration" "Run Taiko" "Update Taiko" "logs" "Enable proposer" "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
                    case $opt in                          
@@ -49,7 +49,6 @@ if [ ! $MMP ]; then
         fi
  . $HOME/.bash_profile
 sleep 1
-sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
 break
@@ -69,16 +68,33 @@ rm .env
 cp .env.sample .env 
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=${AHTTPS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=${WSS}%g" $HOME/simple-taiko-node/.env
-sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
 sleep 2
+#proposer 
+read -r -p "Run proposer? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
+    sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
+            ;;
+    *)
+        echo Running
+        break
+        ;;
+esac
 #docker stop
 cd $HOME/simple-taiko-node && docker compose down
 #docker start
 docker compose up -d
 docker compose logs -f
 
+break
+;;
+"Enable proposer")
+sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
+cd $HOME/simple-taiko-node && docker compose down
+docker compose up -d
+docker compose logs -f
 break
 ;;
 "logs")
