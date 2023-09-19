@@ -39,10 +39,7 @@ if [ ! $WS ]; then
 	fi
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=${AHTTPS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=${WSS}%g" $HOME/simple-taiko-node/.env
-read -r -p "Run proposer? [y/N] " response
-case "$response" in
-    [yY][eE][sS]|[yY]) 
-        if [ ! $MMA ]; then
+if [ ! $MMA ]; then
 		read -p "Enter Metamask address : " MMA
 		echo 'export MMA='${MMA} >> $HOME/.bash_profile
         fi
@@ -55,13 +52,6 @@ sleep 1
 sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
-        ;;
-    *)
-        echo "Config created"
-        break
-        ;;
-esac
-
 break
 ;;
 "Run Taiko")
@@ -79,19 +69,9 @@ rm .env
 cp .env.sample .env 
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=${AHTTPS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=${WSS}%g" $HOME/simple-taiko-node/.env
-
-read -r -p "Run proposer? [y/N] " response
-case "$response" in
-    [yY][eE][sS]|[yY]) 
 sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
-        ;;
-    *)
-        echo Running
-        break
-        ;;
-esac
 sleep 2
 #docker stop
 cd $HOME/simple-taiko-node && docker compose down
@@ -102,16 +82,7 @@ docker compose logs -f
 break
 ;;
 "logs")
-read -r -p "grep proposer? [y/N] " response
-case "$response" in
-    [yY][eE][sS]|[yY]) 
-docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f | grep proposer
-        ;;
-    *)
-docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 1000
-        break
-        ;;
-esac
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
 break
 ;;
 "Uninstall")
