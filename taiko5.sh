@@ -33,7 +33,7 @@ if [ ! $AHTTPS ]; then
 		read -p "Enter ALCHEMY(Infura) HTTPS : " AHTTPS
 		echo 'export AHTTPS='${AHTTPS} >> $HOME/.bash_profile
 	fi
-if [ ! $WS ]; then
+if [ ! $WSS ]; then
 		read -p "Enter ALCHEMY(Infura) WSS : " WSS
 		echo 'export WSS='${WSS} >> $HOME/.bash_profile
 	fi
