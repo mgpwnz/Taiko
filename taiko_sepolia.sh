@@ -66,8 +66,8 @@ git pull
 sleep 5
 rm .env 
 cp .env.sample .env 
-sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=${HTTP}%g" $HOME/simple-taiko-node/.env
-sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=${SWS}%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://${HTTP}%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://${SWS}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
 sleep 2
