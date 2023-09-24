@@ -78,7 +78,7 @@ read -r -p "Run proposer? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
     sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
-    sed -i -e "s%PROVER_ENDPOINTS=http://taiko_client_prover_relayer:9876.*%PROVER_ENDPOINTS=http://pool-1.taikopool.xyz%g" $HOME/simple-taiko-node/.env
+    sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=http://pool-1.taikopool.xyz%g" $HOME/simple-taiko-node/.env
             ;;
     *)
         echo Running
@@ -95,7 +95,7 @@ break
 ;;
 "Enable proposer")
 sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
-sed -i -e "s%PROVER_ENDPOINTS=http://taiko_client_prover_relayer:9876.*%PROVER_ENDPOINTS=http://pool-1.taikopool.xyz%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=http://pool-1.taikopool.xyz%g" $HOME/simple-taiko-node/.env
 cd $HOME/simple-taiko-node && docker compose down
 docker compose up -d
 docker compose logs -f
