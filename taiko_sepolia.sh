@@ -1,5 +1,5 @@
 #!/bin/bash
-link=http://taiko-a5-prover-simple.zkpool.io
+link=https://taiko-a5-prover.zkpool.io
 while true
 do
 
