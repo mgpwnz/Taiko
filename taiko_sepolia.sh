@@ -82,7 +82,7 @@ case "$response" in
     sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
     sed -i -e "s%BLOCK_PROPOSAL_FEE=.*%BLOCK_PROPOSAL_FEE=10%g" $HOME/simple-taiko-node/.env
     sed -i -e "s%MIN_ACCEPTABLE_PROOF_FEE=.*%MIN_ACCEPTABLE_PROOF_FEE=10%g" $HOME/simple-taiko-node/.env
-#    sed -i -e "s%ENABLE_PROVER=false%ENABLE_PROVER=true%g" $HOME/simple-taiko-node/.env
+    sed -i -e "s%PROVE_UNASSIGNED_BLOCKS=false%PROVE_UNASSIGNED_BLOCKS=true%g" $HOME/simple-taiko-node/.env
             ;;
     *)
         echo Running
@@ -102,7 +102,7 @@ sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-no
 sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%BLOCK_PROPOSAL_FEE=.*%BLOCK_PROPOSAL_FEE=10%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%MIN_ACCEPTABLE_PROOF_FEE=.*%MIN_ACCEPTABLE_PROOF_FEE=10%g" $HOME/simple-taiko-node/.env
-#sed -i -e "s%ENABLE_PROVER=false%ENABLE_PROVER=true%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%PROVE_UNASSIGNED_BLOCKS=false%PROVE_UNASSIGNED_BLOCKS=true%g" $HOME/simple-taiko-node/.env
 cd $HOME/simple-taiko-node && docker compose down
 docker compose up -d
 docker compose logs -f
