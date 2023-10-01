@@ -1,6 +1,6 @@
 #!/bin/bash
 #link=https://taiko-a5-prover.zkpool.io,http://taiko-a5-prover-simple.zkpool.io
-link=http://taiko.web3cript.xyz:9876,http://ttko.web3cript.xyz:9876
+link=http://taiko.web3cript.xyz:9876,http://ttko.web3cript.xyz:9876,https://taiko-a5-prover.zkpool.io,http://taiko-a5-prover-simple.zkpool.io,http://purethereal.xyz:9876,http://45.144.28.60:9876
 #link=http://purethereal.xyz:9876
 #link=https://taiko-a5-prover.zkpool.io
 while true
