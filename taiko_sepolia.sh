@@ -1,15 +1,16 @@
 #!/bin/bash
 #link=https://taiko-a5-prover.zkpool.io,http://taiko-a5-prover-simple.zkpool.io
-#link=http://taiko.web3cript.xyz:9876,http://ttko.web3cript.xyz:9876
+link=http://taiko.web3cript.xyz:9876,http://ttko.web3cript.xyz:9876,https://taiko-a5-prover.zkpool.io,http://taiko-a5-prover-simple.zkpool.io,http://purethereal.xyz:9876,http://45.144.28.60:9876
 #link=http://purethereal.xyz:9876
-link=https://taiko-a5-prover.zkpool.io
+#link=https://taiko-a5-prover.zkpool.io
 while true
 do
 
 # Menu
 
 PS3='Select an action: '
-options=("Docker" "Download the components" "Create the configuration Sepolia" "Run Taiko" "Update Taiko" "logs" "Enable proposer" "Uninstall" "Exit")
+#options=("Docker" "Download the components" "Create the configuration Sepolia" "Run Taiko" "Update Taiko" "logs" "Enable proposer" "Uninstall" "Exit")
+options=("Docker" "Download the components" "Create the configuration" "Run Taiko with proposer" "Update Taiko" "logs" "logs only proposer" "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
                    case $opt in                          
@@ -65,6 +66,18 @@ docker compose logs -f
 
 break
 ;;
+"Run Taiko with proposer")
+sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%BLOCK_PROPOSAL_FEE=.*%BLOCK_PROPOSAL_FEE=10%g" $HOME/simple-taiko-node/.env
+#sed -i -e "s%MIN_ACCEPTABLE_PROOF_FEE=.*%MIN_ACCEPTABLE_PROOF_FEE=10%g" $HOME/simple-taiko-node/.env
+ sed -i -e "s%PROVE_UNASSIGNED_BLOCKS=false%PROVE_UNASSIGNED_BLOCKS=true%g" $HOME/simple-taiko-node/.env
+#sed -i -e "s%ENABLE_PROVER=false%ENABLE_PROVER=true%g" $HOME/simple-taiko-node/.env
+cd $HOME/simple-taiko-node
+docker compose up -d
+docker compose logs -f
+break
+;;
 "Update Taiko")
 cd $HOME/simple-taiko-node/
 git pull
@@ -117,6 +130,11 @@ break
 docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
 break
 ;;
+"logs only proposer")
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250 | grep proposer
+break
+;;
+
 "Uninstall")
 if [ ! -d "$HOME/simple-taiko-node" ]; then
     break
