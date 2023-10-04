@@ -9,8 +9,7 @@ do
 # Menu
 
 PS3='Select an action: '
-#options=("Docker" "Download the components" "Create the configuration Sepolia" "Run Taiko" "Update Taiko" "logs" "Enable proposer" "Uninstall" "Exit")
-options=("Docker" "Download the components" "Create the configuration Sepolia" "Run Taiko with proposer" "Update Taiko" "logs" "logs only proposer" "Uninstall" "Exit")
+options=("Docker" "Download the components" "Create the configuration Sepolia" "Run Taiko" "Update Taiko" "logs" "Enable proposer" "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
                    case $opt in                          
