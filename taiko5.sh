@@ -9,8 +9,8 @@ do
 # Menu
 
 PS3='Select an action: '
-options=("Docker" "Download the components" "Create the configuration" "Run Taiko" "Update Taiko" "logs" "Enable proposer" "Uninstall" "Exit")
-#options=("Docker" "Download the components" "Create the configuration" "Run Taiko" "Update Taiko" "logs" "logs proposer" "Enable proposer" "Uninstall" "Exit")
+#options=("Docker" "Download the components" "Create the configuration" "Run Taiko" "Update Taiko" "logs" "Enable proposer" "Uninstall" "Exit")
+options=("Docker" "Download the components" "Create the configuration" "Run Taiko with proposer" "Update Taiko" "logs" "logs only proposer" "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
                    case $opt in                          
@@ -63,7 +63,18 @@ break
 cd $HOME/simple-taiko-node/
 docker compose up -d 
 docker compose logs -f
-
+break
+;;
+"Run Taiko with proposer")
+sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%BLOCK_PROPOSAL_FEE=.*%BLOCK_PROPOSAL_FEE=10%g" $HOME/simple-taiko-node/.env
+#sed -i -e "s%MIN_ACCEPTABLE_PROOF_FEE=.*%MIN_ACCEPTABLE_PROOF_FEE=10%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%PROVE_UNASSIGNED_BLOCKS=false%PROVE_UNASSIGNED_BLOCKS=true%g" $HOME/simple-taiko-node/.env
+#sed -i -e "s%ENABLE_PROVER=false%ENABLE_PROVER=true%g" $HOME/simple-taiko-node/.env
+cd $HOME/simple-taiko-node
+docker compose up -d
+docker compose logs -f
 break
 ;;
 "Update Taiko")
@@ -118,7 +129,7 @@ break
 docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
 break
 ;;
-"logs proposer")
+"logs only proposer")
 docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250 | grep proposer
 break
 ;;
