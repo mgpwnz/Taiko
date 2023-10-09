@@ -80,7 +80,7 @@ break
 "Update Taiko")
 cd $HOME/simple-taiko-node/
 git pull
-sleep 5
+sleep 2
 rm .env 
 cp .env.sample .env 
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=${AHTTPS}%g" $HOME/simple-taiko-node/.env
