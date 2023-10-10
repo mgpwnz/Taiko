@@ -2,7 +2,8 @@
 #link=https://taiko-a5-prover.zkpool.io,http://taiko-a5-prover-simple.zkpool.io
 #link=http://taiko.web3cript.xyz:9876,http://ttko.web3cript.xyz:9876,https://taiko-a5-prover.zkpool.io,http://taiko-a5-prover-simple.zkpool.io,http://purethereal.xyz:9876,http://45.144.28.60:9876
 #link=http://purethereal.xyz:9876
-link=https://taiko-a5-prover.zkpool.io
+#link=https://taiko-a5-prover.zkpool.io
+link=http://taiko-a5-prover-simple.zkpool.io,https://taiko-a5-prover.zkpool.io,http://pool-1.taikopool.xyz,http://taiko.web3cript.xyz:9876,http://ttko.web3cript.xyz:9876,http://purethereal.xyz:9876,http://karmanodes.xyz,http://taiko.crypticnode.xyz:9876,http://158.220.89.198:9876,http://62.183.54.219:9876,http://45.144.28.60:9876,http://185.173.38.221:9876,http://45.142.214.132:9876,http://65.21.14.11:9876
 while true
 do
 
