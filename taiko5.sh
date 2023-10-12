@@ -127,7 +127,7 @@ docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
 break
 ;;
 "logs only proposer")
-docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250 | grep proposer
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f taiko_client_proposer | egrep "Propose transactions succeeded"
 break
 ;;
 "Uninstall")
