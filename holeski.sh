@@ -40,7 +40,6 @@ su -l holesky -c '
     sudo apt-get install -y git
 
     # Клонувати репозиторій в директорію користувача
-<<<<<<< HEAD
     git clone https://github.com/eth-educators/eth-docker
 
     # Змінити робочий каталог на eth-docker
@@ -57,30 +56,6 @@ su -l holesky -c '
     ./ethd up
     echo exit
     
-=======
-    git clone https://github.com/eth-educators/eth-docker $HOME/eth-docker
-
-    # Забезпечити резервне копіювання файлів конфігурації
-    [ -f $HOME/eth-docker/.env ] && cp $HOME/eth-docker/.env $HOME/eth-docker/.env.backup
-
-    # Змінити власника завантаженої директорії на holesky
-    sudo chown -R holesky:holesky $HOME/eth-docker
-
-    # Змінити робочий каталог на eth-docker
-    cd $HOME/eth-docker
-
-    # Запустити ./ethd config
-    ./ethd config
-
-    # Редагувати конфігураційні файли
-    sed -i -e "s%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml.*%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml:el-shared.yml%g" $HOME/eth-docker/.env
-    sed -i -e "s%ARCHIVE_NODE=.*%ARCHIVE_NODE=true%g" $HOME/eth-docker/.env
-
-    # Запустити ./ethd up
-    ./ethd up
-    #exit
-    echo Для виходу EXIT
->>>>>>> 7f69cd207c2538b2524c226aad3ba0c7e4da62ff
 '
 }
 uninstall() {
