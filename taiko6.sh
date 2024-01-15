@@ -16,7 +16,7 @@ else
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/Taiko/main/holeski.sh)
 fi
 
-#echo Перевір чи синхронізувалася твоя нода http://`wget -qO- eth0.me`:3000/
+echo Перевір чи синхронізувалася твоя нода http://`wget -qO- eth0.me`:3000/
 
 break
 ;;
