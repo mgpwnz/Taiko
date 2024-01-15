@@ -12,11 +12,12 @@ select opt in "${options[@]}"
 #Holesky
 if id "holesky" &>/dev/null; then
     echo "Користувач holesky вже існує."
+    echo -e "\e[91mПеред запуском перевір чи синхронізувалася твоя нода http://$(wget -qO- eth0.me):3000/\e[0m"
 else
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/Taiko/main/holeski.sh)
 echo -e "\e[91mГрафана Holesky  http://$(wget -qO- eth0.me):3000/\e[0m"
 fi
-echo -e "\e[91mПеред запуском перевір чи синхронізувалася твоя нода http://$(wget -qO- eth0.me):3000/\e[0m"
+
 break
 ;;
 "Holesky logs")
