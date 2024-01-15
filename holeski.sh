@@ -24,7 +24,7 @@ while test $# -gt 0; do
 done
 install() {
 #create user
-
+read -p "Passwd: " Pass
 #docker
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
 sudo adduser holesky -p $Pass -G sudo
