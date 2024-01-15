@@ -14,10 +14,9 @@ if id "holesky" &>/dev/null; then
     echo "Користувач holesky вже існує."
 else
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/Taiko/main/holeski.sh)
+echo -e "\e[91mГрафана Holesky  http://$(wget -qO- eth0.me):3000/\e[0m"
 fi
-
-echo Перевір чи синхронізувалася твоя нода http://`wget -qO- eth0.me`:3000/
-
+echo -e "\e[91mПеред запуском перевір чи синхронізувалася твоя нода http://$(wget -qO- eth0.me):3000/\e[0m"
 break
 ;;
 "Holesky logs")
@@ -38,9 +37,19 @@ sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
 break
 ;;
 "Run Taiko")
+echo -e "\e[91mПеред запуском перевір чи синхронізувалася твоя нода http://$(wget -qO- eth0.me):3000/\e[0m"
+read -r -p "Запустити ноду? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
 cd $HOME/simple-taiko-node/
 docker compose up -d 
 docker compose logs -f
+            ;;
+    *)
+        echo Відміна!
+        break
+        ;;
+esac
 break
 ;;
 
@@ -53,21 +62,6 @@ cp .env.sample .env
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://127.0.0.1:8545%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://127.0.0.1:8546%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.envv
-sleep 2
-#proposer 
-read -r -p "Run proposer? [y/N] " response
-case "$response" in
-    [yY][eE][sS]|[yY]) 
-    sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
-    sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
-    sed -i -e "s%BLOCK_PROPOSAL_FEE=.*%BLOCK_PROPOSAL_FEE=100%g" $HOME/simple-taiko-node/.env
-    sed -i -e "s%PROVE_UNASSIGNED_BLOCKS=false%PROVE_UNASSIGNED_BLOCKS=true%g" $HOME/simple-taiko-node/.env
-            ;;
-    *)
-        echo Running
-        break
-        ;;
-esac
 #docker stop
 cd $HOME/simple-taiko-node && docker compose down
 #docker start
