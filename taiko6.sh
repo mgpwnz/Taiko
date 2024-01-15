@@ -3,7 +3,7 @@ while true
 do
 # Menu
 PS3='Select an action: '
-options=("Holesky" "Download the components" "Create the configuration" "Update Taiko" "logs"  "Uninstall" "Exit")
+options=("Holesky" "Holesky logs" "Download the components" "Create the configuration" "Update Taiko" "logs"  "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
                    case $opt in                          
@@ -20,7 +20,10 @@ echo Перевір чи синхронізувалася твоя нода http
 
 break
 ;;
-
+"Holesky logs")
+docker logs -n 10 -f eth-docker-execution-1
+break
+;;
 "Download the components")
 # Clone repository
 git clone https://github.com/taikoxyz/simple-taiko-node.git
