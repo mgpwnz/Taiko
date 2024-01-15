@@ -28,17 +28,29 @@ install() {
 sudo adduser --disabled-password --gecos "" holesky
 sudo usermod -aG sudo holesky
 su - holesky
-#clone repo
+
+# Переконатися, що Git встановлено
+sudo apt-get install -y git
+
+# Клонувати репозиторій
 git clone https://github.com/eth-educators/eth-docker
 cd $HOME/eth-docker
+
+# Перевірити наявність файлів та директорій перед використанням
+[ -f .env ] && cp .env .env.backup
+[ -f $HOME/eth-docker/.env ] && cp $HOME/eth-docker/.env $HOME/eth-docker/.env.backup
+
+# Запустити ./ethd config
 ./ethd config
-#edit config
+
+# Редагувати конфігураційні файли
 sed -i -e "s%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml.*%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml:el-shared.yml%g" $HOME/eth-docker/.env
 sed -i -e "s%ARCHIVE_NODE=.*%ARCHIVE_NODE=true%g" $HOME/eth-docker/.env
-#run
+
+# Запустити ./ethd up
 ./ethd up
 #exit
-exit
+echo Для виходу EXIT
 }
 uninstall() {
 read -r -p "You really want to delete the node? [y/N] " response
