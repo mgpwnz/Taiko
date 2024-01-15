@@ -55,7 +55,7 @@ sudo -u holesky -H bash <<'EOF'
         ./ethd config
         
         # Редагуємо .env файл
-        sed -i -e "s%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml.*%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml:el-shared.yml%g" "$env_file"
+        sed -i -e "s%COMPOSE_FILE=.*%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml:el-shared.yml%g" "$env_file"
         sed -i -e "s%ARCHIVE_NODE=.*%ARCHIVE_NODE=true%g" "$env_file"
     else
         echo "Файл $env_file вже існує."
