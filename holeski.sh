@@ -23,8 +23,6 @@ while test $# -gt 0; do
 	esac
 done
 install() {
-#docker
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
 # Перевірити, чи користувач вже існує
 if id "holesky" &>/dev/null; then
     echo "Користувач holesky вже існує."
@@ -36,6 +34,9 @@ fi
 # Змінити користувача
 su -l holesky -c '
 
+    #docker
+    . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
+    
     # Переконатися, що Git встановлено
     sudo apt-get install -y git
 
@@ -62,12 +63,15 @@ uninstall() {
 read -r -p "You really want to delete the node? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
-    su - holesky
+    su -l holesky -c '
     cd $HOME/eth-docker
     ./ethd terminate
     exit
+        
+'
     sudo rm -rf /home/holesky/
     sudo userdel holesky
+    
     ;;
     *)
         echo Сanceled
