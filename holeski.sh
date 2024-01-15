@@ -35,22 +35,7 @@ fi
 # Змінити користувача та виконати команди під новим користувачем
 sudo -u holesky -H bash <<'EOF'
     # Встановлення Docker та Docker Compose
-    if ! command -v docker &>/dev/null; then
-        apt-get update
-        apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-        apt-get update
-        apt-get install -y docker-ce docker-ce-cli containerd.io
-    fi
-    
-    if ! command -v docker-compose &>/dev/null; then
-        apt-get install -y wget jq
-        latest_compose_version=$(wget -qO- https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)
-        wget -O /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/${latest_compose_version}/docker-compose-$(uname -s)-$(uname -m)"
-        chmod +x /usr/local/bin/docker-compose
-    fi
-
+    . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
     # Переконатися, що Git встановлено
     apt-get install -y git
 
