@@ -3,7 +3,7 @@ while true
 do
 # Menu
 PS3='Select an action: '
-options=("Holesky" "Holesky logs" "Download the components" "Create the configuration" "Update Taiko" "logs"  "Uninstall" "Exit")
+options=("Holesky" "Holesky logs" "Download the components" "Run Taiko" "Create the configuration" "Update Taiko" "logs"  "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
                    case $opt in                          
