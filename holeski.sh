@@ -31,12 +31,12 @@ else
     sudo adduser --disabled-password --gecos "" holesky
     sudo usermod -aG sudo holesky
 fi
-# Змінити користувача
-su -l holesky -c '
 
-    #docker
+# Змінити користувача і виконати команди під новим користувачем
+sudo -u holesky -H bash <<'EOF'
+    # Встановити Docker
     . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
-    
+
     # Переконатися, що Git встановлено
     sudo apt-get install -y git
 
@@ -55,9 +55,7 @@ su -l holesky -c '
 
     # Запустити ./ethd up
     ./ethd up
-    echo exit
-    
-'
+EOF
 }
 uninstall() {
 read -r -p "You really want to delete the node? [y/N] " response
