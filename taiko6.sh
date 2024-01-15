@@ -1,9 +1,7 @@
 #!/bin/bash
 while true
 do
-
 # Menu
-
 PS3='Select an action: '
 options=("Holesky" "Download the components" "Create the configuration" "Update Taiko" "logs"  "Uninstall" "Exit")
 select opt in "${options[@]}"
