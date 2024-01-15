@@ -23,11 +23,10 @@ while test $# -gt 0; do
 	esac
 done
 install() {
-#create user
-read -p "Passwd: " Pass
 #docker
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
-sudo adduser holesky -p $Pass -G sudo
+sudo adduser --disabled-password --gecos "" holesky
+sudo usermod -aG sudo holesky
 su - holesky
 #clone repo
 git clone https://github.com/eth-educators/eth-docker
