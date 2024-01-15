@@ -15,7 +15,7 @@ if id "holesky" &>/dev/null; then
 else
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/Taiko/main/holeski.sh)
 fi
-echo Перевір чи синхронізувалася твоя нода http://`wget -qO- eth0.me`:3000/d/Dashboard/home-staking-dashboard?orgId=1&refresh=10s
+echo Перевір чи синхронізувалася твоя нода http://`wget -qO- eth0.me`:3000/
 break
 ;;
 
