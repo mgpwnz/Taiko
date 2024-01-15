@@ -25,8 +25,15 @@ done
 install() {
 #docker
 . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
-sudo adduser --disabled-password --gecos "" holesky
-sudo usermod -aG sudo holesky
+# Перевірити, чи користувач вже існує
+if id "holesky" &>/dev/null; then
+    echo "Користувач holesky вже існує."
+else
+    # Створити нового користувача
+    sudo adduser --disabled-password --gecos "" holesky
+    sudo usermod -aG sudo holesky
+fi
+# Змінити користувача
 su - holesky
 
 # Переконатися, що Git встановлено
