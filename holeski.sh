@@ -28,11 +28,8 @@ if id "holesky" &>/dev/null; then
     echo "Користувач holesky вже існує."
 else
     # Створити нового користувача
-    sudo adduser --disabled-password --gecos "" holesky
+    sudo adduser --gecos "" holesky
     sudo usermod -aG sudo holesky
-    
-    # Встановити пароль для нового користувача
-    echo "holesky:your_password" | sudo chpasswd
 fi
 # Змінити користувача та виконати команди під новим користувачем
 sudo -u holesky -H bash <<'EOF'
