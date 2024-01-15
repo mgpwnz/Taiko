@@ -63,21 +63,20 @@ uninstall() {
 read -r -p "You really want to delete the node? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
-    su -l holesky -c '
-    cd $HOME/eth-docker
-    ./ethd terminate
-    exit
-        
-'
-    sudo rm -rf /home/holesky/
-    sudo userdel holesky
-    
-    ;;
+        sudo -u holesky -H sh -c '
+            cd $HOME/eth-docker
+            ./ethd terminate
+            exit
+        '
+        sudo rm -rf /home/holesky/
+        sudo userdel holesky
+        ;;
     *)
-        echo Сanceled
+        echo "Cancelled"
         return 0
         ;;
 esac
+
 }
 update() {
 echo Under development
