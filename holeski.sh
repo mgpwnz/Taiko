@@ -39,13 +39,17 @@ su - holesky
 # Переконатися, що Git встановлено
 sudo apt-get install -y git
 
-# Клонувати репозиторій
-git clone https://github.com/eth-educators/eth-docker
-cd $HOME/eth-docker
+# Клонувати репозиторій в директорію користувача
+git clone https://github.com/eth-educators/eth-docker $HOME/eth-docker
 
-# Перевірити наявність файлів та директорій перед використанням
-[ -f .env ] && cp .env .env.backup
+# Забезпечити резервне копіювання файлів конфігурації
 [ -f $HOME/eth-docker/.env ] && cp $HOME/eth-docker/.env $HOME/eth-docker/.env.backup
+
+# Змінити власника завантаженої директорії на holesky
+sudo chown -R holesky:holesky $HOME/eth-docker
+
+# Змінити робочий каталог на eth-docker
+cd $HOME/eth-docker
 
 # Запустити ./ethd config
 ./ethd config
