@@ -32,9 +32,22 @@ cp .env.sample .env
 break
 ;;
 "Create the configuration")
+read -r -p "Holesky is local node? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://127.0.0.1:8545%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8546%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
+            ;;
+    *)
+        read -p "Enter ip ADDRESS: " HL
+        sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://$HL:8545%g" $HOME/simple-taiko-node/.env
+        sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://$HL:8546%g" $HOME/simple-taiko-node/.env
+        sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
+        break
+        ;;
+esac
+
 break
 ;;
 "Run Taiko")
@@ -60,9 +73,21 @@ git pull
 sleep 2
 rm .env 
 cp .env.sample .env 
+read -r -p "Holesky is local node? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://127.0.0.1:8545%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8546%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
+            ;;
+    *)
+        read -p "Enter ip ADDRESS: " HL
+        sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://$HL:8545%g" $HOME/simple-taiko-node/.env
+        sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://$HL:8546%g" $HOME/simple-taiko-node/.env
+        sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
+        break
+        ;;
+esac
 #docker stop
 cd $HOME/simple-taiko-node && docker compose down
 #docker start
