@@ -51,7 +51,6 @@ esac
 break
 ;;
 "Run Taiko")
-echo -e "\e[91mПеред запуском перевір чи синхронізувалася твоя нода http://$(wget -qO- eth0.me):3000/\e[0m"
 read -r -p "Запустити ноду? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
