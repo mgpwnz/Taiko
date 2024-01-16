@@ -33,7 +33,7 @@ break
 ;;
 "Create the configuration")
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://127.0.0.1:8545%g" $HOME/simple-taiko-node/.env
-sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://127.0.0.1:8546%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8546%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
 break
 ;;
@@ -61,7 +61,7 @@ sleep 2
 rm .env 
 cp .env.sample .env 
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://127.0.0.1:8545%g" $HOME/simple-taiko-node/.env
-sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://127.0.0.1:8546%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8546%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.envv
 #docker stop
 cd $HOME/simple-taiko-node && docker compose down
