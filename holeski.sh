@@ -35,7 +35,7 @@ fi
 # Змінити користувача та виконати команди під новим користувачем
 sudo -u holesky -H bash <<'EOF'
     # Встановлення Docker та Docker Compose
-    . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
+    #. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
     # Переконатися, що Git встановлено
     apt-get install -y git
 
