@@ -23,6 +23,7 @@ while test $# -gt 0; do
 	esac
 done
 install() {
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
 # Перевірити, чи користувач вже існує
 if id "holesky" &>/dev/null; then
     echo "Користувач holesky вже існує."
