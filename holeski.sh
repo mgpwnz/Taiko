@@ -23,7 +23,7 @@ while test $# -gt 0; do
 	esac
 done
 install() {
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
+#. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
 # Перевірити, чи користувач вже існує
 if id "holesky" &>/dev/null; then
     echo "Користувач holesky вже існує."
@@ -43,7 +43,7 @@ sudo -u holesky -H bash <<'EOF'
     
     #Докер
     ./ethd install
-    
+
     # Шлях до .env файлу
     env_file="$HOME/eth-docker/.env"
     
