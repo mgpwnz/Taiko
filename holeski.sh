@@ -37,7 +37,7 @@ sudo -u holesky -H bash <<'EOF'
     #docker
     if ! command -v docker &> /dev/null; then
 		sudo apt update
-		sudo apt upgrade -y
+		sudo apt-get install unattended-upgrades
 		sudo apt install curl apt-transport-https ca-certificates gnupg lsb-release -y
 		. /etc/*-release
 		wget -qO- "https://download.docker.com/linux/${DISTRIB_ID,,}/gpg" | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
