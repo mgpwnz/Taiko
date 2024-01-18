@@ -50,10 +50,10 @@ sudo -u holesky -H bash <<'EOF'
 	fi
     printf "\e[1m\e[32mInstalled\e[0m\n"
     # Переконатися, що Git встановлено
-    apt-get install -y git
+    sudo apt-get install -y git
 
     # Клонувати репозиторій в директорію користувача
-    git clone https://github.com/eth-educators/eth-docker
+    sudo git clone https://github.com/eth-educators/eth-docker
 
     # Змінити робочий каталог на eth-docker
     cd $HOME/eth-docker
