@@ -41,7 +41,7 @@ sudo -u holesky -H bash <<'EOF'
 
     # Змінити робочий каталог на eth-docker
     cd $HOME/eth-docker
-    
+    echo pwd
     #Докер
     ./ethd install
 
