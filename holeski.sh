@@ -44,20 +44,13 @@ sudo -u holesky -H bash <<'EOF'
 
     # Шлях до .env файлу
     env_file="$HOME/eth-docker/.env"
-
-    # Перевірити, чи існує .env файл
-    if [ ! -f "$env_file" ]; then
-        echo "Файл $env_file відсутній. Створюємо його..."
-        
-        # Викликаємо ./ethd config для створення .env
+    
+    # Викликаємо ./ethd config для створення .env
         ./ethd config
         
         # Редагуємо .env файл
         sed -i -e "s%COMPOSE_FILE=.*%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml:grafana.yml:grafana-shared.yml:mev-boost.yml:el-shared.yml%g" "$env_file"
         sed -i -e "s%ARCHIVE_NODE=.*%ARCHIVE_NODE=true%g" "$env_file"
-    else
-        echo "Файл $env_file вже існує."
-    fi
 
     # Запустити ./ethd up
     ./ethd up
