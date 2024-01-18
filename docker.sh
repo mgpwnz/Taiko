@@ -17,4 +17,13 @@ fi
 		docker_version=`apt-cache madison docker-ce | grep -oPm1 "(?<=docker-ce \| )([^_]+)(?= \| https)"`
 		sudo apt install docker-ce="$docker_version" docker-ce-cli="$docker_version" containerd.io -y
 	fi
+	if ! command -v docker-compose &> /dev/null; then
+		sudo apt update
+		sudo apt upgrade -y
+		sudo apt install wget jq -y
+		local docker_compose_version=`wget -qO- https://api.github.com/repos/docker/compose/releases/latest | jq -r ".tag_name"`
+		sudo wget -O /usr/bin/docker-compose "https://github.com/docker/compose/releases/download/${docker_compose_version}/docker-compose-`uname -s`-`uname -m`"
+		sudo chmod +x /usr/bin/docker-compose
+		. $HOME/.bash_profile
+	fi
 printf "\e[1m\e[32mInstalled\e[0m\n"
