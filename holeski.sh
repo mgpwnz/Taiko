@@ -51,12 +51,18 @@ sudo -u holesky -H bash <<'EOF'
     # Викликаємо ./ethd config для створення .env
         ./ethd config
         
+    if [ -e "$env_file" ]; then
         # Редагуємо .env файл
         sed -i -e "s%COMPOSE_FILE=.*%COMPOSE_FILE=lighthouse-cl-only.yml:geth.yml:grafana.yml:grafana-shared.yml:mev-boost.yml:el-shared.yml%g" "$env_file"
         sed -i -e "s%ARCHIVE_NODE=.*%ARCHIVE_NODE=true%g" "$env_file"
 
     # Запустити ./ethd up
     ./ethd up
+    else
+        echo ".env файл не існує. Перевірте інсталяцію."
+        exit 1
+    fi
+
 EOF
 }
 uninstall() {
