@@ -36,7 +36,8 @@ else
 fi
 # Змінити користувача та виконати команди під новим користувачем
 sudo -u holesky -H bash <<'EOF'
-    
+    # git
+    sudo apt-get install -y git
     # Клонувати репозиторій в директорію користувача
     sudo git clone https://github.com/eth-educators/eth-docker
 
