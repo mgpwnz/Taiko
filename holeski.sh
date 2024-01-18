@@ -34,14 +34,16 @@ else
 fi
 # Змінити користувача та виконати команди під новим користувачем
 sudo -u holesky -H bash <<'EOF'
-    # Встановлення Docker
-    . <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
+    
     # Клонувати репозиторій в директорію користувача
     sudo git clone https://github.com/eth-educators/eth-docker
 
     # Змінити робочий каталог на eth-docker
     cd $HOME/eth-docker
-
+    
+    #Докер
+    ./ethd install
+    
     # Шлях до .env файлу
     env_file="$HOME/eth-docker/.env"
     
@@ -77,6 +79,11 @@ esac
 }
 update() {
 echo Under development
+sudo -u holesky -H bash <<'EOF'
+# Змінити робочий каталог на eth-docker
+    cd $HOME/eth-docker
+
+EOF
 }
 # Actions
 sudo apt install wget -y &>/dev/null
