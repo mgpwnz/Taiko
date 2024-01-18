@@ -40,13 +40,13 @@ sudo -u holesky -H bash <<'EOF'
     git clone https://github.com/eth-educators/eth-docker
 
     # Змінити робочий каталог на eth-docker
-    cd $HOME/eth-docker
+    cd /home/holesky/eth-docker
     echo pwd
     #Докер
     ./ethd install
 
     # Шлях до .env файлу
-    env_file="$HOME/eth-docker/.env"
+    env_file="/home/holesky/eth-docker/.env"
     
     # Викликаємо ./ethd config для створення .env
         ./ethd config
