@@ -31,8 +31,6 @@ else
     # Створити нового користувача
     sudo adduser --gecos "" holesky
     sudo usermod -aG sudo holesky
-    sudo usermod -aG docker holesky
-    newgrp docker
 fi
 # Змінити користувача та виконати команди під новим користувачем
 sudo -u holesky -H bash <<'EOF'
