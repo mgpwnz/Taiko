@@ -1,3 +1,2 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/Taiko/main/holeski.sh)
