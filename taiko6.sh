@@ -89,18 +89,18 @@ sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
         break
         ;;
 esac
-sleep 3
-read -r -p "Run proposer? [y/N] " response
-case "$response" in
-    [yY][eE][sS]|[yY]) 
-    sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
-    sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
-            ;;
-    *)
-        echo Running
-        break
-        ;;
-esac
+#sleep 3
+#read -r -p "Run proposer? [y/N] " response
+#case "$response" in
+#    [yY][eE][sS]|[yY]) 
+#    sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
+#    sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
+#            ;;
+#    *)
+#        echo Running
+#        break
+#        ;;
+#esac
 #docker stop
 cd $HOME/simple-taiko-node && docker compose down
 #docker start
@@ -114,6 +114,21 @@ docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
 break
 ;;
 "Enable proposer")
+bash_profile=$HOME/.bash_profile
+if [ -f "$bash_profile" ]; then
+    . $HOME/.bash_profile
+fi
+if [ ! $MMA ]; then
+		read -p "Enter Metamask address : " MMA
+		echo 'export MMA='${MMA} >> $HOME/.bash_profile
+        fi
+if [ ! $MMP ]; then
+		read -p "Enter Metamask Private Key : " MMP
+		echo 'export MMP='${MMP} >> $HOME/.bash_profile
+        fi
+ . $HOME/.bash_profile
+sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%L2_SUGGESTED_FEE_RECIPIENT=.*%L2_SUGGESTED_FEE_RECIPIENT=${MMA}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
 cd $HOME/simple-taiko-node
