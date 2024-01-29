@@ -1,9 +1,10 @@
 #!/bin/bash
+link=http://taiko-a6-prover.zkpool.io:9876
 while true
 do
 # Menu
 PS3='Select an action: '
-#options=("Holesky" "Holesky logs" "Download the components" "Create the configuration" "Run Taiko" "Update Taiko" "logs"  "Uninstall" "Exit")
+#options=("Holesky" "Holesky logs" "Download the components" "Create the configuration" "Run Taiko" "Enable proposer" "Update Taiko" "logs"  "Uninstall" "Exit")
 options=("Download the components" "Create the configuration" "Run Taiko" "Update Taiko" "logs"  "Uninstall" "Exit")
 select opt in "${options[@]}"
                do
@@ -88,6 +89,18 @@ sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
         break
         ;;
 esac
+sleep 3
+read -r -p "Run proposer? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
+    sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
+    sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
+            ;;
+    *)
+        echo Running
+        break
+        ;;
+esac
 #docker stop
 cd $HOME/simple-taiko-node && docker compose down
 #docker start
@@ -100,7 +113,15 @@ break
 docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
 break
 ;;
-
+"Enable proposer")
+sed -i -e "s%ENABLE_PROPOSER=false%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
+cd $HOME/simple-taiko-node
+docker compose up -d
+sleep 5
+docker compose logs -f
+break
+;;
 "Uninstall")
 if [ ! -d "$HOME/simple-taiko-node" ]; then
     break
