@@ -97,10 +97,10 @@ sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
         break
         ;;
 esac
-cd $HOME/simple-taiko-node && docker compose down
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml down
 #docker start
-docker compose up -d
-docker compose logs -f
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml up -d && \
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
 break
 ;;
 
