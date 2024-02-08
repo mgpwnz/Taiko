@@ -71,6 +71,16 @@ break
 ;;
 
 "Update Taiko")
+# ADD PRIVATE KEY
+bash_profile=$HOME/.bash_profile
+if [ -f "$bash_profile" ]; then
+    . $HOME/.bash_profile
+fi
+if [ ! $MMP ]; then
+		read -p "Enter Metamask Private Key : " MMP
+		echo 'export MMP='${MMP} >> $HOME/.bash_profile
+        fi
+ . $HOME/.bash_profile
 #GIT UPDATE
 cd $HOME/simple-taiko-node/
 git pull
