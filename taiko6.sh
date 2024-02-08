@@ -32,7 +32,7 @@ if [ ! $MMP ]; then
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%BLOCK_PROPOSAL_FEE=.*%BLOCK_PROPOSAL_FEE=30%g" $HOME/simple-taiko-node/.env
-sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=http://taiko-a6-prover.zkpool.io:9876%g" $HOME/simple-taiko-node/.env
+sed -i -e "s%ENABLE_PROPOSER=.*%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 #RPC config
 read -r -p "Holesky is local node? [y/N] " response
 case "$response" in
@@ -81,8 +81,7 @@ cp .env.sample .env
 sed -i -e "s%L1_PROPOSER_PRIVATE_KEY=.*%L1_PROPOSER_PRIVATE_KEY=${MMP}%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=$link%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%BLOCK_PROPOSAL_FEE=.*%BLOCK_PROPOSAL_FEE=30%g" $HOME/simple-taiko-node/.env
-sed -i -e "s%PROVER_ENDPOINTS=.*%PROVER_ENDPOINTS=http://taiko-a6-prover.zkpool.io:9876%g" $HOME/simple-taiko-node/.env
-#RPC CONFIG
+sed -i -e "s%ENABLE_PROPOSER=.*%ENABLE_PROPOSER=true%g" $HOME/simple-taiko-node/.env
 read -r -p "Holesky is local node? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
