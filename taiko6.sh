@@ -50,7 +50,6 @@ sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
         break
         ;;
 esac
-
 break
 ;;
 "Run Taiko")
@@ -88,19 +87,23 @@ case "$response" in
 sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://127.0.0.1:8545%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://`wget -qO- eth0.me`:8546%g" $HOME/simple-taiko-node/.env
 sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml down
+#docker start
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml up -d && \
+docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
             ;;
     *)
         read -p "Enter ip ADDRESS: " HL
         sed -i -e "s%L1_ENDPOINT_HTTP=.*%L1_ENDPOINT_HTTP=http://$HL:8545%g" $HOME/simple-taiko-node/.env
         sed -i -e "s%L1_ENDPOINT_WS=.*%L1_ENDPOINT_WS=ws://$HL:8546%g" $HOME/simple-taiko-node/.env
         sed -i -e "s%PORT_GRAFANA=3001%PORT_GRAFANA=3002%g" $HOME/simple-taiko-node/.env
+        docker compose -f $HOME/simple-taiko-node/docker-compose.yml down
+        #docker start
+        docker compose -f $HOME/simple-taiko-node/docker-compose.yml up -d && \
+        docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
         break
         ;;
 esac
-docker compose -f $HOME/simple-taiko-node/docker-compose.yml down
-#docker start
-docker compose -f $HOME/simple-taiko-node/docker-compose.yml up -d && \
-docker compose -f $HOME/simple-taiko-node/docker-compose.yml logs -f --tail 250
 break
 ;;
 
