@@ -16,7 +16,7 @@ break
 ;;
 "Create the configuration")
 cd $HOME/simple-taiko-node/
-rm .env 
+rm .env &>null
 cp .env.sample .env 
 # ADD PRIVATE KEY
 bash_profile=$HOME/.bash_profile
