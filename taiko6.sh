@@ -1,5 +1,5 @@
 #!/bin/bash
-link=http://taiko-a6-prover.zkpool.io:9876
+link=http://taiko-a6-prover.zkpool.io:80
 while true
 do
 # Menu
